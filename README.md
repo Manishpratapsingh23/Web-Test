@@ -7,6 +7,3 @@ frontend -- > React
 Styling --> tailwind CSS 
 pushed the code on Web-Test (https://github.com/Manishpratapsingh23/Web-Test)
 deployed it on vercel (https://web-test-kappa-two.vercel.app/)
-
-
-
