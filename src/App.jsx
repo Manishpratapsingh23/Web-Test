@@ -1,14 +1,26 @@
-import { useState } from 'react'
-import './App.css'
+import { useEffect, useState } from "react";
+import MemeGallery from "./components/MemeGallery";
+import SearchBar from "./components/SearchBar";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [memes, setMemes] = useState([]);
+  const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then(res => res.json())
+      .then(data => setMemes(data.data.memes));
+  }, []);
+
+  const filteredMemes = memes.filter(meme =>
+    meme.name.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <>
-      <div className='text-4xl text-red-500'>my name is aks</div>
-    </>
-  )
+    <div className="p-4 text-center">
+      <h1 className="text-3xl font-bold mb-4">Meme Gallery</h1>
+      <SearchBar search={search} setSearch={setSearch} />
+      <MemeGallery memes={filteredMemes} />
+    </div>
+  );
 }
-
-export default App
